@@ -1,0 +1,87 @@
+/* 和風フォント（Google Fonts例） */
+@import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@500&display=swap');
+
+body {
+  background: #222;
+  color: #fff;
+  font-family: 'Kiwi Maru', 'Yu Mincho', '游明朝', serif;
+  text-align: center;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+main {
+  padding-top: 40px;
+}
+
+h1 {
+  font-size: 2.7em;
+  letter-spacing: 0.1em;
+  margin-bottom: 30px;
+}
+
+#fortune-btn {
+  margin: 30px auto 20px;
+  padding: 18px 48px;
+  font-size: 1.3em;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #ffb347, #ffcc33, #ffb347);
+  color: #333;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(255, 204, 51, 0.3);
+  transition: transform 0.1s, box-shadow 0.2s, background 0.3s;
+  outline: none;
+  font-family: inherit;
+}
+#fortune-btn:hover, #fortune-btn:focus {
+  background: linear-gradient(90deg, #ffe066, #ffb347, #ffe066);
+  box-shadow: 0 6px 24px rgba(255, 204, 51, 0.5);
+  transform: scale(1.05);
+}
+
+#result-section {
+  margin: 40px auto 0;
+  min-height: 120px;
+  width: 80vw;
+  max-width: 500px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s;
+  padding: 24px 0 18px 0;
+}
+
+#result-section.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#fortune-title {
+  font-size: 2em;
+  margin: 0 0 10px 0;
+  font-family: inherit;
+}
+
+#fortune-desc {
+  font-size: 1.2em;
+  margin: 0;
+  font-family: inherit;
+}
+
+/* 運勢ごとの色分け */
+.positive #fortune-title { color: #ffe066; text-shadow: 0 0 8px #ffe066; }
+.warning  #fortune-title { color: #ff7675; text-shadow: 0 0 8px #ff7675; }
+.advice   #fortune-title { color: #74b9ff; text-shadow: 0 0 8px #74b9ff; }
+
+/* 花火用canvas */
+#fireworks-canvas {
+  position: fixed;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 100;
+}
