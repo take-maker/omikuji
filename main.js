@@ -128,3 +128,87 @@ document.getElementById('fortune-btn').addEventListener('click', () => {
     setTimeout(launchFirework, i * 300);
   }
 });
+
+// ...既存のコード...
+
+// 運勢ごとのアイコン
+const fortuneIcons = {
+  "大吉": "🎉",
+  "中吉": "😊",
+  "小吉": "🙂",
+  "吉": "😌",
+  "末吉": "🍀",
+  "凶": "⚡",
+  "大凶": "💀",
+  "半吉": "🤔"
+};
+
+// 効果音
+const soundFirework = new Audio('firework.mp3'); // ファイルを用意
+const soundCongrats = new Audio('congrats.mp3'); // ファイルを用意
+
+// 履歴管理
+let history = [];
+let counts = {};
+
+// 履歴表示
+function updateHistory(fortune) {
+  history.unshift(fortune);
+  counts[fortune.title] = (counts[fortune.title] || 0) + 1;
+
+  // 履歴リスト更新
+  const list = document.getElementById('history-list');
+  list.innerHTML = '';
+  history.slice(0, 10).forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = `${fortuneIcons[item.title] || ''} ${item.title} - ${item.desc}`;
+    list.appendChild(li);
+  });
+
+  // カウント表示
+  const countDiv = document.getElementById('fortune-counts');
+  countDiv.innerHTML = Object.entries(counts)
+    .map(([title, num]) => `${fortuneIcons[title] || ''} ${title}: ${num}回`)
+    .join(' / ');
+}
+
+// SNSシェア
+function shareSNS(fortune) {
+  const text = `【${fortune.title}】${fortune.desc} #おみくじ`;
+  const url = encodeURIComponent(location.href);
+  const shareText = encodeURIComponent(text);
+
+  document.getElementById('share-x').href =
+    `https://twitter.com/intent/tweet?text=${shareText}&url=${url}`;
+  document.getElementById('share-line').href =
+    `https://social-plugins.line.me/lineit/share?url=${url}&text=${shareText}`;
+}
+
+// おみくじ表示アニメーション＋アイコン＋効果音＋履歴＋シェア
+function showFortune(fortune) {
+  const section = document.getElementById('result-section');
+  const title = document.getElementById('fortune-title');
+  const desc = document.getElementById('fortune-desc');
+  const icon = document.getElementById('fortune-icon');
+
+  section.classList.remove('visible');
+  setTimeout(() => {
+    title.textContent = fortune.title;
+    desc.textContent = fortune.desc;
+    icon.textContent = fortuneIcons[fortune.title] || '';
+    section.className = fortune.type;
+    section.classList.add('visible');
+    updateHistory(fortune);
+    shareSNS(fortune);
+    if (fortune.type === 'positive') soundCongrats.play();
+    soundFirework.play();
+  }, 400);
+}
+
+// ボタンイベント
+document.getElementById('fortune-btn').addEventListener('click', () => {
+  const idx = Math.floor(Math.random() * fortunes.length);
+  const fortune = fortunes[idx];
+  showFortune(fortune);
+  for (let i = 0; i < 3; i++) setTimeout(launchFirework, i * 300);
+});

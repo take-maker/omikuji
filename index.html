@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <title>おみくじアプリ</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <main>
     <h1>おみくじ</h1>
     <button id="fortune-btn" aria-label="おみくじを引く">おみくじを引く！</button>
+    <!-- ...既存のコード... -->
     <section id="result-section" aria-live="polite" aria-atomic="true">
+      <span id="fortune-icon" aria-hidden="true" style="font-size:2.5em;display:block;"></span>
       <h2 id="fortune-title"></h2>
       <p id="fortune-desc"></p>
+      <div class="share-buttons">
+        <a id="share-x" href="#" target="_blank" rel="noopener" aria-label="Xでシェア">Xでシェア</a>
+        <a id="share-line" href="#" target="_blank" rel="noopener" aria-label="LINEでシェア">LINEでシェア</a>
+      </div>
     </section>
+    <div id="history-area">
+      <h3>おみくじ履歴</h3>
+      <div id="fortune-counts"></div>
+      <ul id="history-list"></ul>
+    </div>
+    <!-- ...既存のコード... -->
     <canvas id="fireworks-canvas"></canvas>
   </main>
   <script src="main.js"></script>
 </body>
+
 </html>
