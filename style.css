@@ -1,6 +1,9 @@
 /* 和風フォント（Google Fonts例） */
 @import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@500&display=swap');
 
+/* ...既存のコード... */
+
+/* body全体の上下余白を減らす */
 body {
   background: #222;
   color: #fff;
@@ -8,13 +11,52 @@ body {
   text-align: center;
   min-height: 100vh;
   margin: 0;
-  overflow-x: hidden;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
+/* mainを中央寄せ＆幅調整＆上下余白を調整 */
 main {
-  padding-top: 40px;
+  margin: 0 auto;
+  padding: 24px 8px 32px 8px;
+  max-width: 420px;
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 18px;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.13);
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
+/* セクションや履歴の幅もmainに合わせる */
+#result-section,
+#history-area {
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* レスポンシブ：スマホで余白を少し減らす */
+@media (max-width: 600px) {
+  main {
+    max-width: 98vw;
+    padding: 12px 2vw 18px 2vw;
+    min-height: 97vh;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+}
+
+/* ...既存のコード... */
 h1 {
   font-size: 2.7em;
   letter-spacing: 0.1em;
